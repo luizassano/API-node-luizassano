@@ -1,15 +1,12 @@
 import express from "express";
-import categoriesRouter from "./routers/categories.routes";
-import productsRouter from "./routers/products.routes";
+import "dotenv/config";
 import { startDatabase } from "./database";
-
 const app = express();
-
 app.use(express.json());
-
-app.use("/categories", categoriesRouter);
-app.use("/products", productsRouter);
-app.use('/',(req,res) => {res.send('hello world')})
-export default app.listen(3000, () => {
-     startDatabase();
+app.use("/teste", (req, res)=>{
+     res.send("Oi")
+})
+export default app.listen(process.env.PORT, () => {
+  startDatabase();
+  console.log("Server running port:" + process.env.PORT);
 });

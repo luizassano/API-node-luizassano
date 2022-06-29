@@ -10,10 +10,10 @@ EXPOSE 3000
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY [ "package.json", "yarn.lock" ] .
 
 RUN yarn
 
 COPY . .
 
-CMD ["yarn", "dev"]
+CMD ["yarn", "run", "dev"]

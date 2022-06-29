@@ -1,29 +1,40 @@
-version: '3.9'
-
-
+version: "3.7"
 services:
-    api:
-        container_name: api
-        image: api_express
-        build: .
-        ports:
-            - 3000:3000
-        depends_on:
-            - db        
-        environment:
-            - DB_USER=luizassano
-            - DB_PASSWORD=1234
-            - DB_HOST=localhost
-            - DB_PORT=5432
-            - DB=products_management
-    db:
-        container_name: db
-        image: postgres:12
-        ports:
-            - 5432:5432
-        environment:
-            - POSTGRES_USER=luizassano
-            - POSTGRES_PASSWORD=1234
-            - POSTGRES_DB=products_management   
-        volumes:
-            - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  api:
+    container_name: api_entrega17
+    image: api_entrega17_sprint4
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=1234
+      - DB_HOST=db_entrega17
+      - DB_PORT=5432
+      - DB=products_management
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; yarn dev'
+    depends_on:
+      - db
+  db:
+    container_name: db_entrega17 
+    image: postgres:14.3-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=products_management
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  db_test:
+    container_name: db_test  
+    image: postgres:14.3-alpine
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=tests_products
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql

@@ -13,7 +13,7 @@ const updateCategoryService = async (name, id) => {
             RETURNING *
             `,
             [name, id]
-        );
+        ); 
 
         return response.rows[0];
     } catch (error) {
