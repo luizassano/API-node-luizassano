@@ -24,11 +24,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=products_management
+
     volumes:
       - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-
-  db_test:
-    container_name: db_test  
+  db_tests:
+    container_name: db_entrega17_tests
     image: postgres:14.3-alpine
     ports:
       - 5431:5432
@@ -36,5 +36,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=tests_products
+
     volumes:
       - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
