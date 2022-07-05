@@ -3,10 +3,11 @@ import "dotenv/config";
 import { startDatabase } from "./database";
 const app = express();
 app.use(express.json());
-app.use("/teste", (req, res)=>{
-     res.send("Oi")
-})
+app.use('/categories', categoriesRouter)
+app.use('/products', productsRouter)
+
 export default app.listen(process.env.PORT, () => {
-  startDatabase();
-  console.log("Server running port:" + process.env.PORT);
+  console.log('open');
+  startDatabase()
 });
+ 
