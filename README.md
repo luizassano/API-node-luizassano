@@ -1,4 +1,4 @@
-# API Produtos e Categotias.
+# API Produtos e Categorias.
 
 ### 🇧🇷 Nessa entrega foi desenvolvidp um serviço de back-end responsável por gerenciar produtos e suas categorias.
 
